@@ -6,7 +6,7 @@ const headerHTML = `
         
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="home.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link">Home</a>
                 <div class="circle"></div>
             </li>
             <li class="nav-item">
