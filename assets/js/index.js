@@ -6,19 +6,19 @@ const headerHTML = `
         
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="index.html" class="nav-link">Home</a>
+                <a href="/index.html" class="nav-link">Home</a>
                 <div class="circle"></div>
             </li>
             <li class="nav-item">
-                <a href="portfolio.html" class="nav-link">Portfolio</a>
+                <a href="/portfolio.html" class="nav-link">Portfolio</a>
                 <div class="circle"></div>
             </li>
             <li class="nav-item">
-                <a href="about.html" class="nav-link">About</a>
+                <a href="/about.html" class="nav-link">About</a>
                 <div class="circle"></div>
             </li>
             <li class="nav-item">
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
                 <div class="circle"></div>
             </li>
         </ul>
@@ -34,11 +34,25 @@ const headerHTML = `
 </header>
 `;
 
+// Injecter le header dans le document
+document.body.insertAdjacentHTML('afterbegin', headerHTML);
+const windowsPath = window.location.pathname;
+
+// Ajouter des écouteurs d'événements aux liens
+document.querySelectorAll('a.nav-link').forEach(link => {
+  const navLinkPathName = new URL(link.href).pathname
+  event.preventDefault();
+  if(windowsPath === navLinkPathName) {
+    link.classList.add('active')
+  }
+});
+
+
 // Injecter le header dans l'élément avec l'ID "header-container"
 document.addEventListener('DOMContentLoaded', function() {
   const headerContainer = document.getElementById('header-container');
   if (headerContainer) {
-    headerContainer.innerHTML = headerHTML;
+    //headerContainer.innerHTML = headerHTML;
     
     // Ajouter les écouteurs d'événements après l'injection du header
     const hamburger = document.querySelector('.hamburger');
@@ -52,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+      console.log("cli")
       hamburger.classList.remove("active");
       navMenu.classList.remove("active");
       wrapper.classList.toggle("hidden");
